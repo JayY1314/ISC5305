@@ -210,37 +210,6 @@ def read_series(path, label):
 - **Data validation**: Checked that data ranges are [0,1] as expected
 - **Visual inspection**: Plotted data shows expected patterns for each dataset
 
-**Output artifacts:**
-- **3-5 output files**: Parameter files, normalized data files, plot script
-- **3-5 curves**: One curve per processed dataset
-- **Labeled axes**: "Index" (x-axis), "Normalized Value" (y-axis)
-- **Title**: "Normalized 1-D Data (MinMax to [0,1])"
-- **Legend**: Shows which curve corresponds to which dataset
 
-## Summary
-
-This implementation successfully addresses all homework requirements:
--  Command-line argument processing with error handling
--  Parameter file parsing and validation
--  Statistical calculations with proper formulas
--  Data normalization to [0,1] range
--  Proper output formatting with iomanip
--  Vector-based data structures
--  Timing measurements
--  Batch processing automation
--  Comprehensive plotting pipeline
--  Complete documentation and error handling
-
-## Data Processing Results (Updated for 1000 samples)
-
-### AbaloneAge Data (Length column, 1000 samples)
-- **Mean**: Calculated from 1000 data points
-- **Standard Deviation**: Calculated from 1000 data points
-- **Data Range**: Normalized to [0,1] range
-
-### StressLevel Data (anxiety_level column, 1000 samples)
-- **Mean**: Calculated from 1000 data points
-- **Standard Deviation**: Calculated from 1000 data points
-- **Data Range**: Normalized to [0,1] range
 
 
