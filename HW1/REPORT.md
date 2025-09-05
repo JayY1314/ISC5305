@@ -18,7 +18,7 @@ if (argc != 2) {
 `
 
 **User error cases guarded against:**
-- **Missing filename**: Checked with rgc != 2 - program exits with usage message
+- **Missing filename**: Checked with argc != 2 - program exits with usage message
 - **Unreadable file**: Checked with if (!file.is_open()) when opening parameter file
 - **Invalid parameter file format**: Program validates that all required parameters are present
 - **Data file not found**: Checked with if (!file.is_open()) when opening data file
@@ -147,7 +147,8 @@ auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - star
 ## 8. Batch runs over a range of parameters
 
 **Automation method:**
-Created batch script (un_processing.bat) that:
+Created batch script (
+un_processing.bat) that:
 `atch
 g++ -o data_processor data_processor.cpp
 data_processor.exe abalone_params.txt
@@ -241,3 +242,4 @@ This implementation successfully addresses all homework requirements:
 - **Mean**: Calculated from 1000 data points
 - **Standard Deviation**: Calculated from 1000 data points
 - **Data Range**: Normalized to [0,1] range
+
