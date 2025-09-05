@@ -149,7 +149,7 @@ auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - star
 **Automation method:**
 Created batch script (
 un_processing.bat) that:
-`atch
+`batch
 g++ -o data_processor data_processor.cpp
 data_processor.exe abalone_params.txt
 data_processor.exe stress_params.txt
@@ -242,4 +242,5 @@ This implementation successfully addresses all homework requirements:
 - **Mean**: Calculated from 1000 data points
 - **Standard Deviation**: Calculated from 1000 data points
 - **Data Range**: Normalized to [0,1] range
+
 
