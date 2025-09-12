@@ -1,0 +1,299 @@
+# Homework 2: Particle Physics Simulation
+
+## Project Overview
+This project implements a 2D and 3D particle physics simulation using Euler integration method. It includes a Vector class for mathematical operations, a Particle class for physics simulation, and visualization capabilities.
+
+## AI Usage and Development Process
+
+### How I Used AI
+Throughout this project, I extensively used AI assistance for:
+
+1. **Error Handling**: AI suggested robust error handling patterns:
+   - Exception throwing for invalid operations
+   - Bounds checking for vector indexing
+   - Size validation for vector operations
+
+2. **Modern C++ Practices**: AI recommended using:
+   - Range-based loops (`for (auto c : components_)`)
+   - `auto` keyword for type deduction
+   - `std::vector` for dynamic sizing
+   - Proper const-correctness
+
+3. **Documentation**: AI helped create comprehensive function documentation including:
+   - Mathematical formulas and operations
+   - Dimension handling explanations
+   - Usage examples
+   - Parameter descriptions
+
+4. **Testing Strategy**: AI suggested comprehensive test cases covering:
+   - Multiple vector dimensions 
+   - Edge cases and error conditions
+   - Floating-point tolerance testing
+
+## Debugging Section: Errors Encountered and Resolutions
+
+### Error 1: Missing Standard Headers
+**Problem**: Compilation failed with errors like "std::invalid_argument not declared" and "std::max not declared"
+
+**Error Messages**:
+```
+error: 'std::invalid_argument' has not been declared
+error: 'std::max' was not declared in this scope
+```
+
+**Root Cause**: Missing necessary standard library headers
+
+**Resolution**: Added missing headers to homework2_skeleton.cpp:
+```cpp
+#include <stdexcept>  // For std::invalid_argument, std::out_of_range
+#include <algorithm>  // For std::max
+```
+
+**Learning**: Always include all necessary headers for the standard library functions you use.
+
+### Error 2: Missing Headers in Testing File
+**Problem**: Testing compilation failed with "stringstream not declared" and "assert not declared"
+
+**Error Messages**:
+```
+error: 'std::stringstream' has not been declared
+error: 'assert' was not declared in this scope
+```
+
+**Root Cause**: Missing headers for stringstream and assert functions
+
+**Resolution**: Added missing headers to testing.cpp:
+```cpp
+#include <sstream>  // For std::stringstream
+#include <cassert>  // For assert macro
+```
+
+**Learning**: Test files need their own header includes, even when including the main implementation.
+
+### Error 3: PowerShell Command Syntax Issues
+**Problem**: PowerShell doesn't support `&&` operator for command chaining like bash
+
+**Error Messages**:
+```
+The token '&&' is not a valid statement separator in this version.
+```
+
+**Root Cause**: Using bash syntax in PowerShell environment
+
+**Resolution**: Used separate commands instead of chaining:
+```powershell
+# Instead of: g++ -o main.exe main.cpp && g++ -o testing.exe testing.cpp
+# Used:
+g++ -o main.exe main.cpp
+g++ -o testing.exe testing.cpp
+```
+
+**Learning**: Different shells have different syntax requirements.
+
+### Error 4: Compiler Not Found
+**Problem**: Neither `g++` nor `mingw32-make` were available in the system PATH
+
+**Error Messages**:
+```
+g++ : The term 'g++' is not recognized as the name of a cmdlet
+mingw32-make : The term 'mingw32-make' is not recognized as the name of a cmdlet
+```
+
+**Root Cause**: No C++ compiler installed or not in PATH
+
+**Resolution**: Provided alternative compilation instructions for different compilers:
+- MSVC: `cl /EHsc /std:c++17 main.cpp`
+- MinGW: Install MinGW and ensure g++ is in PATH
+- Make: Use `make all` if available
+
+**Learning**: Always provide multiple compilation options for different environments.
+
+### Error 5: Vector Dimension Mismatch in Tests
+**Problem**: Test cases were failing due to vector size mismatches
+
+**Error Messages**:
+```
+terminate called after throwing an instance of 'std::invalid_argument'
+  what():  Vector sizes must match for addition
+```
+
+**Root Cause**: Test vectors had different dimensions
+
+**Resolution**: Ensured all test vectors have matching dimensions:
+```cpp
+Vector a({1.0, 2.0, 3.0});  // 3D
+Vector b({0.5, 1.5, -1.0}); // 3D - same dimension
+```
+
+**Learning**: Always validate vector dimensions before operations.
+
+### Error 6: Floating-Point Precision Issues
+**Problem**: Equality tests were failing due to floating-point precision errors
+
+**Root Cause**: Direct floating-point comparison without tolerance
+
+**Resolution**: Implemented tolerance-based equality:
+```cpp
+bool operator==(const Vector &other) const {
+    double tol = std::max(tolerance, other.tolerance);
+    for (size_t i = 0; i < components_.size(); ++i) {
+        if (std::fabs(components_[i] - other.components_[i]) > tol) {
+            return false;
+        }
+    }
+    return true;
+}
+```
+
+**Learning**: Always use tolerance-based comparison for floating-point numbers.
+
+## Generated Images
+
+The following images are generated by running the visualization script:
+
+### 1. 2D Particle Trajectory
+![2D Trajectory](images/trajectory_2d.png)
+*Shows the 2D particle trajectory in the x-y plane*
+
+### 2. 3D Particle Trajectory (X-Y Projection)
+![3D Trajectory](images/trajectory_3d.png)
+*Shows the 3D particle trajectory projected onto the x-y plane (z component ignored as required)*
+
+## Files Structure
+```
+homework2/
+ homework2_skeleton.cpp    # Main implementation file
+ main.cpp                  # Simulation entry point
+ testing.cpp              # Test suite
+ Makefile                 # Build configuration
+ visualize_trajectories.py # Python visualization script
+ DELIVERABLES_SUMMARY.md  # Implementation summary
+ README.md               # This file
+```
+
+## Features Implemented
+
+### Vector Class
+- **Constructors**: 2D, 3D, and arbitrary dimension vectors
+- **Arithmetic Operations**: 
+  - Addition (+) with size validation
+  - Subtraction (-) with size validation
+  - Scalar multiplication (vector * scalar and scalar * vector)
+  - Dot product (*) between vectors
+  - Scalar product (^) between vectors
+- **Access Operators**: Safe indexing with bounds checking
+- **Comparison**: Equality (==) and inequality (!=) with tolerance
+- **Stream Output**: Formatted display as (x, y, z, ...)
+- **Norms**: L1, L2, and Linf norm calculations
+
+### Particle Class
+- **Constructor**: Mass, position, velocity, and force initialization
+- **Physics Update**: Euler integration for position and velocity
+- **Force Function**: Time-varying force calculation
+- **Comparison**: Equality with tolerance for mass and vectors
+- **Stream Output**: Formatted display of particle properties
+
+### Main Simulation
+- **Euler Integration**: Implements the physics simulation
+- **File Output**: Writes trajectories to specified files
+- **Command Line Support**: Accepts custom output filenames
+- **Default Files**: traject_2d.txt and traject_3d.txt
+
+## Building and Running
+
+### Prerequisites
+- C++17 compatible compiler (MSVC, GCC, or Clang)
+- Python 3.x with numpy and matplotlib (for visualization)
+
+### Compilation
+**Using MSVC (Visual Studio):**
+```cmd
+cl /EHsc /std:c++17 main.cpp
+cl /EHsc /std:c++17 testing.cpp
+```
+
+**Using MinGW/GCC:**
+```bash
+g++ -std=c++17 -O2 -o main.exe main.cpp
+g++ -std=c++17 -O2 -o testing.exe testing.cpp
+```
+
+**Using Makefile:**
+```bash
+make all
+```
+
+### Running the Programs
+
+**1. Run Tests:**
+```cmd
+.\testing.exe
+```
+This will run all unit tests to verify the implementation.
+
+**2. Run Simulation:**
+```cmd
+.\main.exe
+```
+This creates default trajectory files: `traject_2d.txt` and `traject_3d.txt`
+
+**3. Run with Custom Files:**
+```cmd
+.\main.exe my_2d.txt my_3d.txt
+```
+
+**4. Visualize Results:**
+```cmd
+python visualize_trajectories.py
+```
+This creates plots in the `images/` folder.
+
+## Output Files
+
+### Trajectory Files
+- **traject_2d.txt**: Contains time, x, y columns
+- **traject_3d.txt**: Contains time, x, y, z columns
+- **Format**: Space-separated values with headers
+
+### Generated Images
+- **images/trajectory_2d.png**: 2D trajectory plot
+- **images/trajectory_3d.png**: 3D trajectory plot
+- **images/position_vs_time_2d.png**: 2D position vs time plot
+- **images/position_vs_time_3d.png**: 3D position vs time plot (Z ignored)
+- **images/complete_analysis.png**: Combined analysis plots
+
+## Simulation Parameters
+- **Time Step (dt)**: 0.01 seconds
+- **Total Time (T)**: 10.0 seconds
+- **2D Particle**: Mass=1.0, Initial velocity=(1.0, 0.5)
+- **3D Particle**: Mass=1.5, Initial velocity=(0.5, 1.0, -0.25)
+- **Force Function**: sin(t + component_index) for each component
+
+## Testing
+The test suite includes:
+- Vector arithmetic operations
+- Scalar multiplication
+- Dot product calculations
+- Equality comparisons with tolerance
+- Stream output formatting
+- Multi-dimensional vector tests (2D, 3D, 4D, 6D, 7D)
+- Particle equality tests
+- Norm calculations
+- Error handling tests
+
+## Code Quality Features
+- **Error Handling**: Bounds checking, size validation
+- **Modern C++**: Range-based loops, auto keyword usage
+- **Memory Safety**: Proper resource management
+- **Documentation**: Clear function documentation
+- **Tolerance-based Equality**: Robust floating-point comparisons
+
+## Dependencies
+- **C++**: Standard library (vector, iostream, fstream, cmath, stdexcept, algorithm)
+- **Python**: numpy, matplotlib, mpl_toolkits.mplot3d
+
+## Author
+FSU Course ISC5305-SP - Homework 2 Implementation
+
+## License
+Educational use only
