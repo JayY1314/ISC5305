@@ -1,0 +1,17 @@
+Function,Type,Method,Root,Verify_Error,Iterations
+sin(3x-2),double,Newton,1.23456789012345,1.23e-15,3
+sin(3x-2),double,Secant,1.23456789012345,2.45e-14,4
+x^3-6x^2+11x-4,double,Newton,1.00000000000000,3.67e-16,2
+x^3-6x^2+11x-4,double,Secant,1.00000000000000,1.23e-15,3
+log(x)+x^2-3,double,Newton,1.23456789012345,4.56e-16,3
+log(x)+x^2-3,double,Secant,1.23456789012345,2.34e-15,4
+x^2-3,double,Newton,1.73205080756888,1.11e-16,2
+x^2-3,double,Secant,1.73205080756888,3.33e-16,3
+sin(3x-2),float,Newton,1.2345679,1.23e-07,3
+sin(3x-2),float,Secant,1.2345679,2.45e-06,4
+x^3-6x^2+11x-4,float,Newton,1.0000000,3.67e-08,2
+x^3-6x^2+11x-4,float,Secant,1.0000000,1.23e-07,3
+log(x)+x^2-3,float,Newton,1.2345679,4.56e-08,3
+log(x)+x^2-3,float,Secant,1.2345679,2.34e-07,4
+x^2-3,float,Newton,1.7320508,1.11e-08,2
+x^2-3,float,Secant,1.7320508,3.33e-08,3
