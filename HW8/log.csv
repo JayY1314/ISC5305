@@ -1,0 +1,19 @@
+timestamp,function_name,test_name,status,message,exception
+33:01.7,main,task1,SUCCESS,completed,
+33:01.7,main,task2,FAILURE,exception caught,"task2(): failure -> task2_help(): value too large, value = 1.998739"
+33:01.7,main,task3,FAILURE,exception caught,task3(): caught in outer level -> task3_help(): intermediate -> Determinant is negative: -2.098004
+33:01.7,main,task1,SUCCESS,completed,
+33:01.7,main,task2,SUCCESS,completed,
+33:01.7,main,task3,FAILURE,exception caught,task3(): caught in outer level -> task3_help(): intermediate -> Determinant is negative: -2.080539
+33:01.7,main,task1,SUCCESS,completed,
+33:01.7,main,task2,SUCCESS,completed,
+33:01.7,main,task3,SUCCESS,completed,
+33:01.7,main,task1,SUCCESS,completed,
+33:01.7,main,task2,SUCCESS,completed,
+33:01.7,main,task3,FAILURE,exception caught,task3(): caught in outer level -> task3_help(): intermediate -> Determinant is negative: -2.334907
+33:01.7,main,task1,FAILURE,exception caught,"task1(): random input < -1.0, value = -1.779280"
+33:01.7,main,task2,SUCCESS,completed,
+33:01.7,main,task3,FAILURE,exception caught,task3(): caught in outer level -> task3_help(): intermediate -> Determinant is negative: -1.137738
+33:02.0,ExperimentRunner::run_all,Integration A,SUCCESS,Completed successfully,
+33:02.2,ExperimentRunner::run_all,Matrix B,SUCCESS,Completed successfully,
+33:02.4,ExperimentRunner::run_all,Integration C,SUCCESS,Completed successfully,
